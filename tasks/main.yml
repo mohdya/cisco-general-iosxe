@@ -1,0 +1,40 @@
+---
+# tasks file for cisco-general
+
+
+
+   - name: Check what will be pushed.
+     ios_config: 
+       diff_against: intended
+       intended_config: general.j2
+
+   - name: General config template push
+     ios_config: 
+       backup: yes
+       src: general.j2
+
+   - name: Set Banner Login
+     ios_banner:
+       banner: login
+       text: |
+         This is the login banner for a confidential device.
+         Please disconnect if you are not authorised.
+       state: present
+
+
+   - name: Set Banner Motd
+     ios_banner:
+       banner: motd
+       text: |
+         This is the motd banner for a confidential device.
+         Please disconnect if you are not authorised.
+       state: present
+
+
+
+
+
+
+
+
+

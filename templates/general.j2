@@ -1,0 +1,64 @@
+service password-encryption
+
+{% if domain_name is defined %}
+ip domain name {{ domain_name }}
+{% endif  %}
+
+{% if inventory_hostname is defined %}
+hostname {{ inventory_hostname }}
+{% endif  %}
+
+service tcp-keepalives-in
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec
+service password-encryption
+!
+logging count
+logging buffered 4096 notifications
+logging console notifications
+
+no ip source-route
+!
+!
+no ip domain lookup
+
+no ip http server
+
+!no ip http secure-server
+
+{% if snmp_servers_list is defined %}
+  {% for snmp_server in snmp_servers_list %}
+
+snmp-server host {{ snmp_server }} {{ snmp_community }} 
+
+  {% endfor %}
+{% endif  %}
+!
+
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+
+{% if exec_timeout_min is defined %}
+
+line vty 0 4
+ exec-timeout {{ exec_timeout_min }} 0
+ privilege level 15
+
+{% endif  %}
+
+{% if ntp_servers_list is defined %}
+  {% for ntp_server in ntp_servers_list %}
+
+ntp server {{ ntp_server }}
+
+  {% endfor %}
+{% endif  %}
+
+
+
+
+
+
+
+
