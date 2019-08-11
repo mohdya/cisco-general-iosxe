@@ -1,4 +1,4 @@
-Ansible Role : Cisco IOS-XE device general config (hardening)
+Ansible Role : Cisco IOS-XE device general configuration (hardening)
 =========
 
 Sample for Cisco IOS-XE devices general configuration.
@@ -19,14 +19,14 @@ Some of the hardening did not need varaiables and hence coded directly in the Ji
 Specifying the list of NTP and SNMP Servers as below.
 
       ntp_servers_list:
-        - 23.23.23.23
-        - 2.2.2.3
+        - x.x.x.x
+        - y.y.y.y
       snmp_servers_list:
-        - 23.44.44.44
-        - 34.33.22.33
+        - a.a.a.a
+        - b.b.b.b
 
 Specifying the SNMP Community, Domain name and Exec Timeout values.
-      snmp_community: cisco
+      snmp_community: COMMSTRING
       domain_name: virl.info
       exec_timeout_min: 0
 
